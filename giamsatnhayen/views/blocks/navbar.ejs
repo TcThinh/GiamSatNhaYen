@@ -1,0 +1,68 @@
+<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm trạm mới</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-map-to-add">
+        <div id="map-to-add"></div>
+        <div id="infor-to-add">
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Tọa độ</span>
+            </div>
+            <input type="text" id="lat" class="form-control" readonly="true" style="text-align: center;" placeholder="kinh độ">
+            <input type="text" id="long" class="form-control" readonly="true" style="text-align: center;" placeholder="vĩ độ">
+          </div>
+
+          <div class="input-group mb-3"">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Địa chỉ chi tiết</span>
+            </div>
+            <textarea class="form-control" id="detail-address"></textarea>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Tên trạm</span>
+            </div>
+            <input type="text" class="form-control" id="add-station-name" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3" id="add-station-warning" style="display: none;">
+            <div class="alert alert-danger" role="alert">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+        <button type="button" id="add-station" class="btn btn-primary" style="background-color: #42A38B; border-color: #42A38B;">Thêm trạm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="navinfor">
+  <div id="nav-container">
+    <div id="nav-left">
+        <img src="/images/bird.png" alt="bird" width="50">
+        <h1>Fkbird</h1>
+    </div>
+    <div id="nav-right" >
+        <a href="/" class="nav-item">Trang chủ</a>
+        <a type="button" class="nav-item" id="dropdownMenuButton" data-target="#exampleModal12" data-toggle="modal" aria-haspopup="true" aria-expanded="false">Thêm trạm mới</a>
+        <div class="btn-group" id="avatar">
+            <button class="btn btn-secondary" style="height: 50px;" type="button">
+              <img src="/images/woman.png" width="30" style="display: block ;margin-left: auto; margin-right: auto;">
+            </button>
+        </div>
+    </div>
+  </div>
+</div>
+<div id="navbar">
+  
+</div>

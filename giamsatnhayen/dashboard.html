@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/dashboard.css">
+</head>
+
+<body>
+    <div id="header" class="container-fluid">
+        <div id="navinfor">
+            <div id="nav-left">
+                <div id="icon-main">iconmain</div>
+            </div>
+            <div id="nav-right">
+
+            </div>
+        </div>
+        <div id="navbar"></div>
+    </div>
+    <div id="main-section">
+        <div id="map-live-chart">
+            <div id="map-container">
+                <div id="mapid">
+                </div>
+            </div>
+            <div class="live-chart-container">
+                <div class="live-chart">
+                    <div class="nav-live-chart">
+                        <h3 style="float:left;">live chart</h3>
+                        <div style="float: right;" class="btn-group">
+                            <select class="custom-select" class="inputGroupSelect01">
+                                <option selected value="1">Station 1</option>
+                                <option value="2">Station 2</option>
+                                <option value="3">Station 3</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="change-block">
+                        <div class="line-chart">
+                            <canvas id="live-chart"></canvas>
+                        </div>
+                        <div class="now-aver">
+                            <div class="row now">
+                                <div class="col" style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <div class=" title-now ">Nhiệt độ hiện tại</div>
+                                    <div class="img-data-sensor ">
+                                        <div class="icon ">
+                                            <img src="./public/images/temperature.png " alt="ddd ">
+                                        </div>
+                                        <div class="data-sensor ">25°C</div>
+                                    </div>
+                                </div>
+                                <div class="col" style="border-left:1px solid black; border-bottom:1px solid black;">
+                                    <div class="title-now">Nhiệt độ trung bình</div>
+                                    <div class="img-data-sensor">
+                                        <div class="icon">
+                                            <img src="./public/images/temperature-sensor.png" alt="ddd">
+                                        </div>
+                                        <div class="data-sensor">25°C</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row aver">
+                                <div class="col" style="border-right:1px solid black; border-top:1px solid black;">
+                                    <div class="title-now">Độ ẩm hiện tại</div>
+                                    <div class="img-data-sensor">
+                                        <div class="icon">
+                                            <img src="./public/images/humidity.png" alt="ddd">
+                                        </div>
+                                        <div class="data-sensor">25%</div>
+                                    </div>
+                                </div>
+                                <div class="col" style="border-left:1px solid black; border-top:1px solid black;">
+                                    <div class=" title-now ">Độ ẩm trung bình</div>
+                                    <div class="img-data-sensor">
+                                        <div class="icon">
+                                            <img src="./public/images/humidity-sensor.png" alt="ddd">
+                                        </div>
+                                        <div class="data-sensor">25%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="thresholds-static-chart">
+            <div id="static-chart">
+                <div id="wrapper-chart">
+                    <canvas id="week-chart"></canvas>
+                </div>
+            </div>
+            <div id="thresholds">
+                <div class="wrapper">
+                    <span>Ngưỡng nhiệt độ <span>23</span></span>
+                    <div class="progress">
+                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span>Vượt ngưỡng</span>
+                    <div class="progress">
+                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span>Ngưỡng độ ẩm</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span>Vượt ngưỡng</span>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="table">
+            <div class="wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Button trigger modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Trạm 1</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2 ">
+                            <div class="input-group-append ">
+                                <span class="input-group-text" id="basic-addon2">@example.com</span>
+                            </div>
+                        </div>
+
+                        <label for="basic-url">Your vanity URL</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+                            </div>
+                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">With textarea</span>
+                            </div>
+                            <textarea class="form-control" aria-label="With textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary ">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="container-fluid"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="/public/js/chart.js "></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI " crossorigin="anonymous"></script>
+    <script>
+        var mymap = L.map('mapid').setView([9.902276, 105.160456], 11);
+        L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=yhEEXEJruqOaORlZJgF1', {
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank >&copy; OpenStreetMap contributors</a>'
+
+        }).addTo(mymap);
+
+        const markers = [{
+            pos: [9.872367, 105.125572],
+            popup: `
+                <h5 class="station-title" data-toggle="modal" data-target="#exampleModal">Trạm 1</h5>
+                <h6 class="temp-color">Nhiệt Độ: <span>23</span><span>°C</span><h6>
+                <h6 class="humi-color">Độ Ẩm: <span>55</span><span>%</span><h6>`
+        }, { //<button type="button " class="btn btn-primary " data-toggle="modal " data-target=".bd-example-modal-lg ">Large modal</button>
+
+            pos: [9.902276, 105.160456],
+            popup: `
+                <h5 class="station-title" data-toggle="modal" data-target="#exampleModal">Trạm 2</h5>
+                <h6 class="temp-color">Nhiệt Độ: <span>23</span><span>°C</span><h6>
+                <h6 class="humi-color">Độ Ẩm: <span>55</span><span>%</span><h6>`
+        }, {
+            pos: [9.939879, 105.133619],
+            popup: `
+                <h5 class="station-title" data-toggle="modal" data-target="#exampleModal">Trạm 3</h5>
+                <h6 class="temp-color">Nhiệt Độ: <span>23</span><span>°C</span><h6>
+                <h6 class="humi-color">Độ Ẩm: <span>55</span><span>%</span><h6>`
+        }];
+
+        markers.forEach(function(obj) {
+            var m = L.marker(obj.pos).addTo(mymap),
+                p = new L.Popup({
+                    autoClose: false,
+                    closeOnClick: false,
+                    maxWidth: 200,
+                    maxHeight: 150
+                })
+                .setContent(obj.popup)
+                .setLatLng(obj.pos);
+            m.bindPopup(p).openPopup();
+        });
+    </script>
+
+</body>
+
+</html>
