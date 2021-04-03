@@ -1,0 +1,13 @@
+Dữ liệu truyền về của DHT11 gồm 40bit dữ liệu theo thứ tự: 8 bit biểu thị phần nguyên của độ ẩm + 8 bit biểu thị phần thập phân của độ ẩm + 8 bit biểu thị phần nguyên của nhiệt độ + 8 bit biểu thị phần thập phân của nhiệt độ + 8 bit check sum.
+
+Ví dụ: ta nhận được 40 bit dữ liệu như sau:
+
+0011 0101     0000 0000     0001 1000     0000 0000     0100 1101
+
+Tính toán: 
+
+8 bit checksum: 0011 0101 + 0000 0000 + 0001 1000 + 0000 0000 = 0100 1101
+
+Độ ẩm: 0011 0101 = 35H = 53% (ở đây do phần thập phân có giá trị 0000 0000, nên ta bỏ qua không tính phần thập phân)
+
+Nhiệt độ: 0001 1000 = 18H = 24°C (ở đây do phần thập phân có giá trị 0000 0000, nên ta bỏ qua không tính phần thập phân)

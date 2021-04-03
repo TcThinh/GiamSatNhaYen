@@ -1,0 +1,40 @@
+!<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script>
+
+		const random = (min, max) => {
+			return Math.round(min + Math.random() * (max - min));
+		}
+
+		const send = () => {
+			(function(i){
+                var xhr = new XMLHttpRequest();
+                var url = `http://localhost:1337/dh11?station=1&temperature=${random(25,28)}&humidity=${random(75,90)}`
+                xhr.open('GET',url, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        console.log(xhr.responseText); // 0, 1, 2 
+                    }
+                };
+                xhr.send();
+            })();
+		}
+
+
+		window.onload = function() {
+		    var f = (function() {
+		    	setInterval(
+		    		send
+		    		, 1000);
+		        
+		    })();
+		};
+
+	</script>
+</body>
+</html>
